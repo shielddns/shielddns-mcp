@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shielddns-mcp"
+version = "0.1.3"
+description = "MCP server that lets AI agents check domains and resolve names through the ShieldDNS protective, zero-log European resolver"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "ShieldDNS", email = "contact@shielddns.eu" }]
+keywords = ["mcp", "dns", "doh", "dnssec", "security", "phishing", "ai-agents"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Internet :: Name Service (DNS)",
+  "Topic :: Security",
+]
+dependencies = [
+  "mcp>=2.0,<3",
+  "dnspython>=2.6",
+  "httpx[http2]>=0.27",
+  "tldextract>=5.1",
+]
+
+[project.urls]
+Homepage = "https://www.shielddns.eu"
+Repository = "https://github.com/shielddns/shielddns-mcp"
+Issues = "https://github.com/shielddns/shielddns-mcp/issues"
+
+[project.scripts]
+shielddns-mcp = "shielddns_mcp.server:main"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/shielddns_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
